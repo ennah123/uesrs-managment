@@ -71,16 +71,11 @@ export function DeleteUserModal({ user }: DeleteUserModalProps) {
         <DialogHeader>
           <DialogTitle>Delete User</DialogTitle>
           <DialogDescription>
-            Are you sure you want to delete this user? This action cannot be undone.
+            Are you sure you want to delete this user <span className="font-medium">{user.name}</span>? This action cannot be undone.
           </DialogDescription>
         </DialogHeader>
         
         <div className="space-y-4">
-          <div className="p-4 border rounded-lg bg-muted/50">
-            <p className="font-medium">{user.name}</p>
-            <p className="text-sm text-muted-foreground">{user.email}</p>
-            <p className="text-sm text-muted-foreground">Role: {user.role}</p>
-          </div>
 
           <div className="flex justify-end space-x-2">
             <Button 
