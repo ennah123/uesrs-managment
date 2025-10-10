@@ -1,26 +1,12 @@
-import { CreateUserModal } from "@/components/ui/AddUser";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { DeleteUserModal } from "@/components/ui/DeleteUser";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { EditUserModal } from "@/components/ui/UpdateUser";
-
-
+import { CreateUserModal } from "@/components/ui/AddUser"
+import { UserTableClient } from "@/components/UserTable"
 
 type User = {
   _id: string
   name: string
   email: string
   role: string
-  createdAt: String
+  createdAt: string
 }
 
 async function getUsers(): Promise<User[]> {
@@ -44,48 +30,7 @@ export default async function Home() {
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Table */}
-          <div className="lg:col-span-2">
-            <Table>
-              <TableCaption>A list of all registered users.</TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Date Regeistered</TableHead>
-                  <TableHead className="text-end">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {users.map((user) => ( 
-                  <TableRow key={user._id}>
-                    <TableCell className="font-medium">{user.name}</TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        user.role === 'admin' 
-                          ? 'bg-gray-100 text-gray-800' 
-                          : user.role === 'moderator'
-                          ? 'bg-blue-100 text-blue-800'
-                          : 'bg-gray-100 text-gray-800'
-                      }`}>
-                        {user.role}
-                      </span>
-                    </TableCell>
-                    <TableCell>{user.createdAt.slice(0,10)}</TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex justify-end space-x-2">
-                        <EditUserModal user={user} />
-                        <DeleteUserModal user={user} />
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+          <UserTableClient initialUsers={users} />
         </div>
       </div>
     </div>
